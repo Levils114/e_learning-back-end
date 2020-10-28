@@ -5,15 +5,14 @@ import CreateUserService from './../../services/User/CreateUserService';
 const userRoutes = express();
 userRoutes.use(json());
 
-userRoutes.post('/', (request, response) => {
+userRoutes.post('/', async(request, response) => {
 	const { name, email, password } = request.body;
 
 	const createUserService = new CreateUserService();
 
-	const user = await CreateUserService.execute({name, email, password});
+	const user = await createUserService.execute({name, email, password});
 	
-
-	response.json({ user: user });
+	response.json(user);
 });
 
 export default userRoutes;
