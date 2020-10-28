@@ -5,7 +5,8 @@ export default class PutImageInCourse1603904530157 implements MigrationInterface
     public async up(queryRunner: QueryRunner): Promise<any> {
     	await queryRunner.addColumn('courses', new TableColumn({
     		name: 'image',
-    		type: 'varchar'
+    		type: 'varchar',
+    		isNullable: true
     	}))
     }
 

@@ -4,7 +4,7 @@
   "port": 5432,
   "username": "postgres",
   "password": "e_learning123",
-  "database": "e_learning",
+  "database": "postgres",
   "entities": [
     "./src/entities/*.ts"
   ],
