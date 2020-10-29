@@ -3,6 +3,7 @@ import express, { json } from 'express';
 import JWTvarification from './../../utils/JWTverification';
 
 import CreateCourseService from './../../services/Courses/CreateCourseService';
+import UpdateCourseService from './../../services/Courses/UpdateCourseService';
 import UpdateCourseImage from './../../services/Courses/UpdateCourseImage';
 
 import formidable from 'formidable';
@@ -21,6 +22,17 @@ coursesRoutes.post('/', JWTvarification, async(request, response) => {
 
 	return response.json(course);
 });
+
+coursesRoutes.put('/:id', JWTvarification, async(request, response) => {
+	const { id } = request.params;
+	const { newName } = request.body;
+
+	const updateCourseService = new UpdateCourseService();
+
+	const course = await updateCourseService.execute({ course_id: id, newName });
+
+	return response.json(course);
+})
 
 coursesRoutes.patch('/update-image/:course_id', JWTvarification, async(request, response) => {
 	const { course_id } = request.params;
