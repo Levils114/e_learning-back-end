@@ -22,7 +22,7 @@ coursesRoutes.post('/', JWTvarification, async(request, response) => {
 	return response.json(course);
 });
 
-coursesRoutes.put('/update-image/:course_id', JWTvarification, async(request, response) => {
+coursesRoutes.patch('/update-image/:course_id', JWTvarification, async(request, response) => {
 	const { course_id } = request.params;
 
 	const form = new formidable.IncomingForm();
@@ -30,8 +30,10 @@ coursesRoutes.put('/update-image/:course_id', JWTvarification, async(request, re
 	const updateCourseImage = new UpdateCourseImage();
 
 	form.parse(request, (err, fields, files) => {
-		const oldFolder = files.fileuploaded.path;
-		const newFolder = '/home/levi/Desktop/e_learning/back-end/assets/' + files.fileuploaded.name;
+		console.log(files);
+
+		const oldFolder = files.filetoupload.path;
+		const newFolder = '/home/levi/Desktop/e_learning/back-end/assets/' + files.filetoupload.name;
 
 		fs.rename(oldFolder, newFolder, async(err) => {
 			if(err){
