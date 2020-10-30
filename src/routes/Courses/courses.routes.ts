@@ -61,7 +61,7 @@ coursesRoutes.patch('/update-image/:course_id', JWTvarification, async(request, 
 	})
 });
 
-coursesRoutes.get('/', JWTvarification, async(request, response) => {
+coursesRoutes.get('/', async(request, response) => {
 	const listCoursesService = new ListCoursesService();
 
 	const courses = await listCoursesService.execute();
@@ -69,7 +69,7 @@ coursesRoutes.get('/', JWTvarification, async(request, response) => {
 	return response.json(courses);
 });
 
-coursesRoutes.get('/:id/lessons', JWTvarification, async(request, response) => {
+coursesRoutes.get('/:id/lessons', async(request, response) => {
 	const mac_address = request.header('mac_address');
 	const { id } = request.params;
 
