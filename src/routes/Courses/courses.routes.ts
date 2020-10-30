@@ -5,10 +5,14 @@ import JWTvarification from './../../utils/JWTverification';
 import CreateCourseService from './../../services/Courses/CreateCourseService';
 import UpdateCourseService from './../../services/Courses/UpdateCourseService';
 import UpdateCourseImage from './../../services/Courses/UpdateCourseImage';
+import ListCoursesService from './../../services/Courses/ListCoursesService';
+import ListLessonsFromCourse from './../../services/Courses/ListLessonsFromCourse';
 
 import formidable from 'formidable';
 
 import fs from 'fs';
+
+import os from 'os';
 
 const coursesRoutes = express();
 coursesRoutes.use(json());
@@ -42,8 +46,6 @@ coursesRoutes.patch('/update-image/:course_id', JWTvarification, async(request, 
 	const updateCourseImage = new UpdateCourseImage();
 
 	form.parse(request, (err, fields, files) => {
-		console.log(files);
-
 		const oldFolder = files.filetoupload.path;
 		const newFolder = '/home/levi/Desktop/e_learning/back-end/assets/' + files.filetoupload.name;
 
@@ -58,5 +60,28 @@ coursesRoutes.patch('/update-image/:course_id', JWTvarification, async(request, 
 		})
 	})
 });
+
+coursesRoutes.get('/', JWTvarification, async(request, response) => {
+	const listCoursesService = new ListCoursesService();
+
+	const courses = await listCoursesService.execute();
+
+	return response.json(courses);
+});
+
+coursesRoutes.get('/:id/lessons', JWTvarification, async(request, response) => {
+	const mac_address = request.header('mac_address');
+	const { id } = request.params;
+
+	if(!mac_address){
+		return response.status(401).json({ message: 'is missing mac ip' });
+	}
+
+	const listLessonsFromCourse = new ListLessonsFromCourse();
+
+	const { course, lessons } = await listLessonsFromCourse.execute({ course_id: id });
+
+	return response.json({ course, lessons });
+})
 
 export default coursesRoutes;

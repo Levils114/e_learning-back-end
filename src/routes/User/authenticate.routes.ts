@@ -13,6 +13,8 @@ authenticateRoutes.post('/', async(request, response) => {
 
 	const { user, token } = await authenticateUserService.execute({ email, password });
 
+	delete user.password;
+
 	response.json({ user, token });
 });
 
