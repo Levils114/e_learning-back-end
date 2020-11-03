@@ -18,22 +18,22 @@ const coursesRoutes = express();
 coursesRoutes.use(json());
 
 coursesRoutes.post('/', JWTvarification, async(request, response) => {
-	const { name } = request.body;
+	const { name, image } = request.body;
 
 	const createCourseService = new CreateCourseService();
 
-	const course = await createCourseService.execute({ name });
+	const course = await createCourseService.execute({ name, image });
 
 	return response.json(course);
 });
 
 coursesRoutes.put('/:id', JWTvarification, async(request, response) => {
 	const { id } = request.params;
-	const { newName } = request.body;
+	const { newName, newImage } = request.body;
 
 	const updateCourseService = new UpdateCourseService();
 
-	const course = await updateCourseService.execute({ course_id: id, newName });
+	const course = await updateCourseService.execute({ course_id: id, newName, newImage });
 
 	return response.json(course);
 })

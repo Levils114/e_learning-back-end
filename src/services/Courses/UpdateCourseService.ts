@@ -4,11 +4,12 @@ import Course from './../../entities/Courses';
 
 interface IUpdateCourseService{
 	course_id: string;
-	newName: string;
+	newName?: string;
+	newImage?: string;
 }
 
 export default class UpdateCourseService{
-	public async execute({ course_id, newName }: IUpdateCourseService): Promise<Course>{
+	public async execute({ course_id, newName, newImage }: IUpdateCourseService): Promise<Course>{
 		const courseRepository = getRepository(Course);
 
 		const course = await courseRepository.findOne({
@@ -21,7 +22,8 @@ export default class UpdateCourseService{
 			throw new Error("course don't exists");
 		}
 
-		course.name = newName;
+		course.name = !!newName ? newName : course.name;
+		course.image = !!newImage ? newImage : course.image;
 
 		await courseRepository.save(course);
 
