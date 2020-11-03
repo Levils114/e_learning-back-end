@@ -12,11 +12,11 @@ export default class ListCoursesService{
 		const lessons = await lessonRepository.find();
 
 		const coursesFormated = courses.map(course => {
-			const lessonsInCourse = lessons.findIndex(lesson => (lesson.course_id === course.id)) + 1;
+			const lessonsInCourse = lessons.filter(lesson => (lesson.course_id === course.id));
 
 			return({
 				...course,
-				lessonsInCourse
+				lessonsInCourse: lessonsInCourse.length
 			});
 		});
 
