@@ -2,6 +2,7 @@ import express, { json } from 'express';
 
 import CreateLessonService from './../../services/Lesson/CreateLessonService';
 import UpdateLessonService from './../../services/Lesson/UpdateLessonService';
+import ListLessonService from './../../services/Lesson/ListLessonService';
 
 import JWTvalidation from './../../utils/JWTverification';
 
@@ -27,6 +28,16 @@ lessonRoutes.put('/:id', JWTvalidation, async(request, response) => {
 	const lesson = await updateLessonService.execute({ lesson_id: id, name, duration, description, video_id });
 
 	return response.json(lesson);
+});
+
+lessonRoutes.get('/:id', async(request, response) => {
+	const { id } = request.params;
+
+	const listLessonService = new ListLessonService();
+
+	const lesson = await listLessonService.execute(id);
+
+	response.json(lesson);
 })
 
 export default lessonRoutes;
