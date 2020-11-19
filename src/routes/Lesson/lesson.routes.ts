@@ -19,13 +19,13 @@ lessonRoutes.post('/', JWTvalidation, async(request, response) => {
 	return response.json(lesson);
 });
 
-lessonRoutes.put('/:id', JWTvalidation, async(request, response) => {
+lessonRoutes.put('/:id', async(request, response) => {
 	const { id } = request.params;
-	const { name, duration, description, video_id } = request.body;
+	const { name, duration, description, video_id, is_completed } = request.body;
 
 	const updateLessonService = new UpdateLessonService();
 
-	const lesson = await updateLessonService.execute({ lesson_id: id, name, duration, description, video_id });
+	const lesson = await updateLessonService.execute({ lesson_id: id, name, duration, description, video_id, is_completed });
 
 	return response.json(lesson);
 });
