@@ -28,7 +28,12 @@ export default class Lesson1603998249698 implements MigrationInterface {
     		{
     			name: 'description',
     			type: 'varchar'
-    		},
+			},
+			{
+				name: "is_completed",
+				type: "integer",
+				default: '0'
+			},
     		{
     			name: 'video_id',
     			type: 'varchar'

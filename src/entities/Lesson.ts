@@ -8,13 +8,16 @@ class Lesson{
 	@Column()
 	name: string;
 
-	@Column()
+	@Column("integer")
 	duration: number;
 
 	@Column('uuid')
 	course_id: string;
 
 	@Column('integer')
+	is_completed: number;
+
+	@Column()
 	description: string;
 
 	@Column()
