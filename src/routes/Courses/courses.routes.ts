@@ -70,12 +70,7 @@ coursesRoutes.get('/', async(request, response) => {
 });
 
 coursesRoutes.get('/:id/lessons', async(request, response) => {
-	const mac_address = request.header('mac_address');
 	const { id } = request.params;
-
-	if(!mac_address){
-		return response.status(401).json({ message: 'is missing mac ip' });
-	}
 
 	const listLessonsFromCourse = new ListLessonsFromCourse();
 
