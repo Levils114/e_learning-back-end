@@ -16,12 +16,7 @@ Bem-vindo a api do aplicativo [e.learning](https://github.com/Levils114/e_learni
     ```sh
     docker run --name e_learning-backend -e POSTGRES_USER=postgres -e POSTGRES_PASSWORD=e_learning123 -d -p 127.0.0.1:5432:5432 postgres
     ```
-
-  - Após a criação do container, execute o seguinte comando para rodar as migrations:
-    ```sh
-    yarn typeorm migration:run
-    ```
-
+    
   - Agora vamos instalar as dependências da aplicação. Para isso, execute o seguinte comando:
     ```sh
      npm install
@@ -29,6 +24,11 @@ Bem-vindo a api do aplicativo [e.learning](https://github.com/Levils114/e_learni
     ou
     ```sh
      yarn
+    ```
+
+  - Após a instalação das dependências, execute o seguinte comando para rodar as migrations:
+    ```sh
+    yarn typeorm migration:run
     ```
 
   - Agora basta usar o comando abaixo e aproveitar a aplicação 😁 
