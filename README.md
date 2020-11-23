@@ -51,7 +51,7 @@ Bem-vindo a api do aplicativo [e.learning](https://github.com/Levils114/e_learni
 
   - Rotas para aulas:
       - POST ``/lessons`` (criação de aula) 
-      - PUT ``/courses/:id`` (atualização de aulas)
+      - PUT ``/lessons/:id`` (atualização de aulas)
       - GET ``/lessons/:id`` (listagem de dados de uma determinada aula)
 
 
